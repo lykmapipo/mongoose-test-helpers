@@ -25,6 +25,42 @@ before(done => connect(done));
 after(done => drop(done));
 ```
 
+## API
+
+### `connect([url: String], done: Function)`
+Establish connection using provided connection string, `process.env.MONGODB_URI` or 
+default to `test` database
+
+Example:
+```js
+before(done => connect(done));
+```
+
+### `clear([...modelNames: String], done: Function)`
+Clear data of specified `modelNames`. If none provided all models will be cleared.
+
+Example
+```js
+after(done => clear('User', 'Profile', done));
+after(done => clear(done));
+```
+
+### `drop(done: Function)`
+Deletes the test database, including all collections, documents, and indexes.
+
+Example
+```js
+after(done => drop(done));
+```
+
+### `disconnect([url: String], done: Function)`
+Close all connection used in test
+
+Example
+```js
+after(done => disconnect(done));
+```
+
 ## Testing
 * Clone this repository
 
