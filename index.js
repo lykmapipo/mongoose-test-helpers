@@ -17,14 +17,15 @@
 
 /* dependencies */
 const _ = require('lodash');
+// const { waterfall } = require('async');
 const mongoose = require('mongoose');
+// const { MissingSchemaError } = mongoose.Error;
 
 
 /**
- * @function setup
- * @name setup
- * @alias open
- * @alias connect
+ * @function connect
+ * @name connect
+ * @description Opens the default mongoose connection
  * @param {String} [url] valid mongodb conenction string. if not provided it 
  * will be obtained from process.env.MONGODB_URI
  * @param {Function} done a callback to invoke on success or failure
@@ -33,13 +34,16 @@ const mongoose = require('mongoose');
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * setup(done);
- * setup(<url>, done);
+ * connect(done);
+ * connect(<url>, done);
  */
-exports.open = exports.connect = exports.setup = function setup(url, done) {
+exports.connect = function connect(url, done) {
+
+  // ensure test database
+  const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://localhost/test');
 
   // normalize arguments
-  const _url = _.isFunction(url) ? undefined : process.env.MONGODB_URI;
+  const _url = _.isFunction(url) ? MONGODB_URI : url;
   const _done = _.isFunction(url) ? url : done;
 
   // connection options
@@ -47,5 +51,61 @@ exports.open = exports.connect = exports.setup = function setup(url, done) {
 
   // establish mongoose connection
   mongoose.connect(_url, _options, _done);
+
+};
+
+
+/**
+ * @function disconnect
+ * @name disconnect
+ * @description Close all mongoose connection
+ * @param {Function} done a callback to invoke on success or failure
+ * @return {Object|Error} valid instance mongoose or error
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.1.0
+ * @version 0.1.0
+ * @example
+ * disconnect(done);
+ */
+exports.disconnect = function disconnect(done) {
+  mongoose.disconnect(done);
+};
+
+
+/**
+ * @function drop
+ * @name drop
+ * @description Deletes the given database, including all collections, 
+ * documents, and indexes
+ * @param {Function} done a callback to invoke on success or failure
+ * @return {Object|Error} valid instance mongoose or error
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.1.0
+ * @version 0.1.0
+ * @example
+ * drop(done);
+ */
+exports.drop = function drop(done) {
+
+  // drop database if connection available
+  const canDrop =
+    (mongoose.connection && mongoose.connection.readyState === 1);
+  if (canDrop && mongoose.connection.dropDatabase) {
+    mongoose.connection.dropDatabase(function afterDropDatabase(error) {
+      // back-off on error
+      if (error) {
+        done(error);
+      }
+      // disconnect 
+      else {
+        exports.disconnect(done);
+      }
+    });
+  }
+  // continue
+  else {
+    // disconnect
+    exports.disconnect(done);
+  }
 
 };

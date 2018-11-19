@@ -18,11 +18,11 @@ $ npm install --save mongoose @lykmapipo/mongoose-test-helpers
 ## Usage
 
 ```javascript
-const { setup, cleanup } = require('@lykmapipo/mongoose-test-helpers');
+const { connect, drop } = require('@lykmapipo/mongoose-test-helpers');
 
-before(done => { setup(done) });
+before(done => { connect(done) });
 
-after(done => { cleanup(done) });
+after(done => { drop(done) });
 ```
 
 ## Testing
