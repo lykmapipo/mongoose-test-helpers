@@ -17,7 +17,7 @@
 
 /* dependencies */
 const _ = require('lodash');
-const { waterfall } = require('async');
+const async = require('async');
 const mongoose = require('mongoose');
 
 
@@ -88,10 +88,10 @@ exports.clear = function clear(...modelNames) {
   let _modelNames = [].concat(...modelNames);
 
   // obtain callback
-  const _done = _.last([..._modelNames]);
+  const _done = _.last(_.filter([..._modelNames], _.isFunction));
 
   // collect actual model names
-  _modelNames = _.dropRight([..._modelNames], 1);
+  _modelNames = _.filter([..._modelNames], _.isString);
 
   // collect from mongoose.modelNames();
   if (_.isEmpty(_modelNames)) {
@@ -102,9 +102,11 @@ exports.clear = function clear(...modelNames) {
   _modelNames = _.uniq(_.compact([..._modelNames]));
 
   // map modelNames to deleteMany
+  const connected =
+    (mongoose.connection && mongoose.connection.readyState === 1);
   let deletes = _.map([..._modelNames], function (modelName) {
     const Model = exports.getModel(modelName);
-    if (Model && Model.deleteMany) {
+    if (connected && Model && Model.deleteMany) {
       return function clear(next) {
         Model.deleteMany(function afterDeleteMany(error) {
           next(error);
@@ -116,8 +118,8 @@ exports.clear = function clear(...modelNames) {
   // compact deletes
   deletes = _.compact([...deletes]);
 
-  // delete 
-  waterfall(_.compact(deletes), _done());
+  // delete
+  async.waterfall(deletes, _done);
 
 };
 
