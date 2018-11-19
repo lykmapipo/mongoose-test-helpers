@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/lykmapipo/mongoose-test-helpers.svg?branch=master)](https://travis-ci.org/lykmapipo/mongoose-test-helpers)
 [![Dependencies Status](https://david-dm.org/lykmapipo/mongoose-test-helpers/status.svg)](https://david-dm.org/lykmapipo/mongoose-test-helpers)
-[![npm version](https://badge.fury.io/js/mongoose-test-helpers.svg)](https://badge.fury.io/js/mongoose-test-helpers)
 
 mongoose test helpers.
 
