@@ -21,6 +21,8 @@ const { connect, drop } = require('@lykmapipo/mongoose-test-helpers');
 
 before(done => connect(done));
 
+after(done => clear(done));
+
 after(done => drop(done));
 ```
 
