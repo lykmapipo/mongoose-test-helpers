@@ -46,8 +46,8 @@ describe('mongoose-test-helpers', () => {
   it('should be able to get model silent', () => {
     expect(getModel).to.exist;
     expect(getModel).to.be.a('function');
-    expect(getModel.name).to.be.equal('getModel');
-    expect(getModel.length).to.be.equal(1);
+    expect(getModel.name).to.be.equal('model');
+    expect(getModel.length).to.be.equal(2);
   });
 
   it('should be able to drop', () => {

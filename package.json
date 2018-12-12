@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/mongoose-test-helpers",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "mongoose test helpers",
   "keywords": [
     "lykmapipo",
@@ -44,11 +44,14 @@
     "jshint-stylish": "^2.2.1",
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
-    "mongoose": "^5.3.12"
+    "mongoose": "^5.3.16"
   },
   "peerDependencies": {
-    "async": "^2.6.1",
-    "lodash": "^4.17.11",
-    "mongoose": "^5.3.12"
+    "async": ">=2.6.1",
+    "lodash": ">=4.17.11",
+    "mongoose": ">=5.3.16"
+  },
+  "dependencies": {
+    "@lykmapipo/mongoose-common": ">=0.1.0"
   }
 }

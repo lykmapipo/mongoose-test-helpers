@@ -15,10 +15,22 @@
  */
 
 
+/* setup test environment */
+process.env.NODE_ENV = 'test';
+process.env.DEBUG = true;
+
+
 /* dependencies */
 const _ = require('lodash');
-const async = require('async');
 const mongoose = require('mongoose');
+const { waterfall } = require('async');
+const {
+  connect: _connect,
+  disconnect,
+  clear,
+  drop,
+  model
+} = require('@lykmapipo/mongoose-common');
 
 
 /**
@@ -44,11 +56,8 @@ exports.connect = function connect(url, done) {
   const _url = _.isFunction(url) ? MONGODB_URI : url;
   const _done = _.isFunction(url) ? url : done;
 
-  // connection options
-  const _options = { useNewUrlParser: true };
-
   // establish mongoose connection
-  mongoose.connect(_url, _options, _done);
+  _connect(_url, _done);
 
 };
 
@@ -64,9 +73,7 @@ exports.connect = function connect(url, done) {
  * @example
  * disconnect(done);
  */
-exports.disconnect = function disconnect(done) {
-  mongoose.disconnect(done);
-};
+exports.disconnect = disconnect;
 
 
 /**
@@ -82,46 +89,7 @@ exports.disconnect = function disconnect(done) {
  * clear('User', 'Profile', done);
  * clear(done);
  */
-exports.clear = function clear(...modelNames) {
-
-  // collect provided model names
-  let _modelNames = [].concat(...modelNames);
-
-  // obtain callback
-  const _done = _.last(_.filter([..._modelNames], _.isFunction));
-
-  // collect actual model names
-  _modelNames = _.filter([..._modelNames], _.isString);
-
-  // collect from mongoose.modelNames();
-  if (_.isEmpty(_modelNames)) {
-    _modelNames = [...modelNames].concat(mongoose.modelNames());
-  }
-
-  // compact and ensure unique model names
-  _modelNames = _.uniq(_.compact([..._modelNames]));
-
-  // map modelNames to deleteMany
-  const connected =
-    (mongoose.connection && mongoose.connection.readyState === 1);
-  let deletes = _.map([..._modelNames], function (modelName) {
-    const Model = exports.getModel(modelName);
-    if (connected && Model && Model.deleteMany) {
-      return function clear(next) {
-        Model.deleteMany(function afterDeleteMany(error) {
-          next(error);
-        });
-      };
-    }
-  });
-
-  // compact deletes
-  deletes = _.compact([...deletes]);
-
-  // delete
-  async.waterfall(deletes, _done);
-
-};
+exports.clear = clear;
 
 
 /**
@@ -136,28 +104,59 @@ exports.clear = function clear(...modelNames) {
  * @example
  * drop(done);
  */
-exports.drop = function drop(done) {
+exports.drop = drop;
 
-  // drop database if connection available
-  const canDrop =
+
+/**
+ * @function create
+ * @name create
+ * @description Persist given model instances
+ * @param {Function} done a callback to invoke on success or failure
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.1.0
+ * @version 0.1.0
+ * @example
+ * create(user, done);
+ * create(user, profile, done);
+ * create(user, profile, done);
+ */
+exports.create = function create(...instances) {
+
+  // collect provided instances
+  let _instances = [].concat(...instances);
+
+  // obtain callback
+  const _done = _.last(_.filter([..._instances], function (instance) {
+    return !(instance instanceof mongoose.Model);
+  }));
+
+  // collect actual model instances
+  _instances = _.filter([..._instances], function (instance) {
+    return (instance instanceof mongoose.Model);
+  });
+
+  // compact and ensure unique instances by _id
+  _instances = _.uniqBy(_.compact([..._instances]), '_id');
+
+  // map instances to save
+  const connected =
     (mongoose.connection && mongoose.connection.readyState === 1);
-  if (canDrop && mongoose.connection.dropDatabase) {
-    mongoose.connection.dropDatabase(function afterDropDatabase(error) {
-      // back-off on error
-      if (error) {
-        done(error);
-      }
-      // disconnect 
-      else {
-        exports.disconnect(done);
-      }
-    });
-  }
-  // continue
-  else {
-    // disconnect
-    exports.disconnect(done);
-  }
+  let saves = _.map([..._instances], function (instance) {
+    if (connected && instance.save) {
+      return function save(next) {
+        const fn = (instance.post || instance.save);
+        fn.call(instance, function afterSave(error, saved) {
+          next(error, saved);
+        });
+      };
+    }
+  });
+
+  // compact saves
+  saves = _.compact([...saves]);
+
+  // save
+  waterfall(saves, _done);
 
 };
 
@@ -171,21 +170,7 @@ exports.drop = function drop(done) {
  * @version 0.1.0
  * @example
  * const User = getModel('User');
+ * const User = model('User');
  */
-exports.getModel = function getModel(modelName) {
-
-  //try obtain model
-  try {
-    const Model = mongoose.model(modelName);
-    return Model;
-  }
-
-  //catch error
-  catch (error) {
-
-    //unknown model
-    return undefined;
-
-  }
-
-};
+exports.getModel = model;
+exports.model = model;

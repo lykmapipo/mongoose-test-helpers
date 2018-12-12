@@ -9,23 +9,16 @@ const Schema = mongoose.Schema;
 const {
   connect,
   clear,
-  drop
+  drop,
+  model
 } = require(path.join(__dirname, '..'));
 
 
 describe('use case', () => {
 
-  const User = mongoose.model('User', new Schema({
-    name: String
-  }));
-
-  before((done) => {
-    connect(done);
-  });
-
-  before((done) => {
-    User.create({ name: 'Test User' }, done);
-  });
+  const User = model('User', new Schema({ name: String }));
+  before(done => connect(done));
+  before(done => User.create({ name: 'Test User' }, done));
 
   it('should be able to clear all', (done) => {
     clear((error) => {
@@ -42,7 +35,5 @@ describe('use case', () => {
     });
   });
 
-  after((done) => {
-    drop(done);
-  });
+  after(done => drop(done));
 });
