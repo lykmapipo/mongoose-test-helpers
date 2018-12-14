@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/mongoose-test-helpers",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "mongoose test helpers",
   "keywords": [
     "lykmapipo",
@@ -52,6 +52,6 @@
     "mongoose": ">=5.3.16"
   },
   "dependencies": {
-    "@lykmapipo/mongoose-common": ">=0.2.0"
+    "@lykmapipo/mongoose-common": ">=0.3.0"
   }
 }
