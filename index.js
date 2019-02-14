@@ -33,6 +33,12 @@ const {
 } = require('@lykmapipo/mongoose-common');
 
 
+/* setup sinon */
+require('sinon');
+require('chai').use(require('sinon-chai'));
+require('sinon-mongoose');
+
+
 /**
  * @function connect
  * @name connect

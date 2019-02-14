@@ -33,7 +33,7 @@ describe('mongoose-test-helpers', () => {
     expect(disconnect).to.exist;
     expect(disconnect).to.be.a('function');
     expect(disconnect.name).to.be.equal('disconnect');
-    expect(disconnect.length).to.be.equal(1);
+    expect(disconnect.length).to.be.equal(2);
   });
 
   it('should be able to clear', () => {
@@ -47,14 +47,14 @@ describe('mongoose-test-helpers', () => {
     expect(getModel).to.exist;
     expect(getModel).to.be.a('function');
     expect(getModel.name).to.be.equal('model');
-    expect(getModel.length).to.be.equal(2);
+    expect(getModel.length).to.be.equal(3);
   });
 
   it('should be able to drop', () => {
     expect(drop).to.exist;
     expect(drop).to.be.a('function');
     expect(drop.name).to.be.equal('drop');
-    expect(drop.length).to.be.equal(1);
+    expect(drop.length).to.be.equal(2);
   });
 
   it('should be able to connect on default test db', (done) => {
