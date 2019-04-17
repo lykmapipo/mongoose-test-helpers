@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const {
   connect,
+  create,
   clear,
   drop,
   model
@@ -62,6 +63,30 @@ describe('use case', () => {
           });
         }, 1000);
       }
+    });
+  });
+
+  it('should be able to create models', (done) => {
+    const a = new User({ name: 'A' });
+    const b = new User({ name: 'B' });
+    create(a, b, (error, results) => {
+      const [a, b] = results;
+      expect(error).to.not.exist;
+      expect(a).to.exist;
+      expect(b).to.exist;
+      done(error, results);
+    });
+  });
+
+  it('should be able to create models', (done) => {
+    const a = new User({ name: 'A' });
+    const b = new User({ name: 'B' });
+    create([a, b], (error, results) => {
+      const [a, b] = results;
+      expect(error).to.not.exist;
+      expect(a).to.exist;
+      expect(b).to.exist;
+      done(error, results);
     });
   });
 

@@ -23,9 +23,10 @@ process.env.DEBUG = true;
 /* dependencies */
 const _ = require('lodash');
 const mongoose = require('mongoose');
-const { waterfall } = require('async');
+const { parallel } = require('async');
 const {
   connect: _connect,
+  isInstance,
   disconnect,
   clear,
   drop,
@@ -133,18 +134,19 @@ exports.create = function create(...instances) {
 
   // obtain callback
   const _done = _.last(_.filter([..._instances], function (instance) {
-    return !(instance instanceof mongoose.Model);
+    return !isInstance(instance);
   }));
 
   // collect actual model instances
   _instances = _.filter([..._instances], function (instance) {
-    return (instance instanceof mongoose.Model);
+    return isInstance(instance);
   });
 
   // compact and ensure unique instances by _id
   _instances = _.uniqBy(_.compact([..._instances]), '_id');
 
   // map instances to save
+  // TODO for same model use insertMany
   const connected =
     (mongoose.connection && mongoose.connection.readyState === 1);
   let saves = _.map([..._instances], function (instance) {
@@ -162,7 +164,7 @@ exports.create = function create(...instances) {
   saves = _.compact([...saves]);
 
   // save
-  waterfall(saves, _done);
+  parallel(saves, _done);
 
 };
 
