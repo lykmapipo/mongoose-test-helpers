@@ -18,9 +18,39 @@ describe('use case', () => {
 
   const User = model('User', new Schema({ name: String }));
   before(done => connect(done));
-  before(done => User.create({ name: 'Test User' }, done));
+  beforeEach(done => User.create({ name: 'Test User' }, done));
 
-  it('should be able to clear all', (done) => {
+  it('should be able to clear using provided models', (done) => {
+    clear(User, (error) => {
+      if (error) {
+        done(error);
+      } else {
+        setTimeout(() => {
+          User.countDocuments((error, counts) => {
+            expect(counts).to.equal(0);
+            done(error, counts);
+          });
+        }, 1000);
+      }
+    });
+  });
+
+  it('should be able to clear using provided model names', (done) => {
+    clear('User', (error) => {
+      if (error) {
+        done(error);
+      } else {
+        setTimeout(() => {
+          User.countDocuments((error, counts) => {
+            expect(counts).to.equal(0);
+            done(error, counts);
+          });
+        }, 1000);
+      }
+    });
+  });
+
+  it('should be able to clear all models', (done) => {
     clear((error) => {
       if (error) {
         done(error);
