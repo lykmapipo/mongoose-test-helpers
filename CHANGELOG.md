@@ -1,3 +1,13 @@
+#### 0.4.0 (2019-04-20)
+
+##### Chores
+
+*  force latest dependencies ([a512169f](https://github.com/lykmapipo/mongoose-test-helpers/commit/a512169f729b50b7d2a36da1f6b7acceb79a5415))
+
+##### New Features
+
+*  add createTestModel helper ([a913d463](https://github.com/lykmapipo/mongoose-test-helpers/commit/a913d4630927c79a81d1fee70028e3b840015c30))
+
 #### 0.3.2 (2019-04-17)
 
 ##### Chores
