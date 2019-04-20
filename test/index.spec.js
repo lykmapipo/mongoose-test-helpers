@@ -14,7 +14,8 @@ const {
   disconnect,
   clear,
   drop,
-  getModel
+  getModel,
+  createTestModel
 } = require(path.join(__dirname, '..'));
 
 
@@ -101,6 +102,56 @@ describe('mongoose-test-helpers', () => {
       expect(error).to.not.exist;
       done(error);
     });
+  });
+
+  it('should be able to create default test model', () => {
+    const User = createTestModel();
+    expect(User).to.exist;
+    expect(User.modelName).to.exist;
+    expect(User.base).to.exist;
+    expect(User.path('name')).to.exist;
+  });
+
+  it('should be able to create default test model with plugins', () => {
+    const User = createTestModel({}, function (schema) {
+      schema.statics.withTest = function withTest() {};
+    });
+    expect(User).to.exist;
+    expect(User.modelName).to.exist;
+    expect(User.base).to.exist;
+    expect(User.path('name')).to.exist;
+    expect(User.withTest).to.exist.and.to.be.a('function');
+  });
+
+  it('should be able to create test model with schema', () => {
+    const User = createTestModel({
+      name: { type: String, searchable: true, index: true, fake: true },
+      age: { type: Number, index: true, fake: true },
+      year: { type: Number, index: true, fake: true }
+    });
+    expect(User).to.exist;
+    expect(User.modelName).to.exist;
+    expect(User.base).to.exist;
+    expect(User.path('name')).to.exist;
+    expect(User.path('age')).to.exist;
+    expect(User.path('year')).to.exist;
+  });
+
+  it('should be able to create test model with schema and plugins', () => {
+    const User = createTestModel({
+      name: { type: String, searchable: true, index: true, fake: true },
+      age: { type: Number, index: true, fake: true },
+      year: { type: Number, index: true, fake: true }
+    }, function (schema) {
+      schema.statics.withTest = function withTest() {};
+    });
+    expect(User).to.exist;
+    expect(User.modelName).to.exist;
+    expect(User.base).to.exist;
+    expect(User.path('name')).to.exist;
+    expect(User.path('age')).to.exist;
+    expect(User.path('year')).to.exist;
+    expect(User.withTest).to.exist.and.to.be.a('function');
   });
 
 });

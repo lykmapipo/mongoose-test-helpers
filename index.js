@@ -30,7 +30,8 @@ const {
   disconnect,
   clear,
   drop,
-  model
+  model,
+  Schema
 } = require('@lykmapipo/mongoose-common');
 
 
@@ -166,6 +167,44 @@ exports.create = function create(...instances) {
   // save
   parallel(saves, _done);
 
+};
+
+
+/**
+ * @function createTestModel
+ * @name createTestModel
+ * @description Create a test model for testing
+ * @param {Object} [schema] model schema definition
+ * @param {...Function} [plugins] list of plugins to apply to schema
+ * @return {Model} valid mongoose model
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.4.0
+ * @version 0.1.0
+ * @example
+ * 
+ * const User = createTestModel();
+ * const User = createTestModel({ name: { type: String } }, autopopulate);
+ * 
+ */
+exports.createTestModel = function createTestModel(schema, ...plugins) {
+  // ensure schema definition
+  const definition = _.merge({}, {
+    name: { type: String, searchable: true, index: true, fake: true }
+  }, schema);
+
+  // create schema
+  const testModelSchema = new Schema(definition, { timestamps: true });
+
+  // apply plugins
+  _.forEach([...plugins], function (plugin) {
+    testModelSchema.plugin(plugin);
+  });
+
+  // register dynamic model
+  const testModel = model(testModelSchema);
+
+  // return created model
+  return testModel;
 };
 
 
