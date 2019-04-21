@@ -1,3 +1,33 @@
+#### 0.5.0 (2019-04-21)
+
+##### Chores
+
+*  force latest node on travis ([c200412e](https://github.com/lykmapipo/mongoose-test-helpers/commit/c200412e35a4a2f0b886d4febef32bb71e521643))
+*  force latest dependencies ([ad5e2efe](https://github.com/lykmapipo/mongoose-test-helpers/commit/ad5e2efe81f62d4215895f35e6d52a7ed2cd3756))
+
+##### Documentation Changes
+
+*  update usage ([25babcff](https://github.com/lykmapipo/mongoose-test-helpers/commit/25babcffb55aa0d7aaf8af64438c6499e57f9d87))
+
+##### New Features
+
+*  export sinon and chai shortcuts ([43b0c08c](https://github.com/lykmapipo/mongoose-test-helpers/commit/43b0c08ce12976dab497a3158b2240d0f9731f6a))
+*  add mockInstance helper ([faefab20](https://github.com/lykmapipo/mongoose-test-helpers/commit/faefab20503fc63914d433e0050d67ae1670af53))
+*  add model mock ([d338a480](https://github.com/lykmapipo/mongoose-test-helpers/commit/d338a480666c3f27976da51958931e4dea83d5be))
+
+##### Refactors
+
+*  use arrow function ([e774af34](https://github.com/lykmapipo/mongoose-test-helpers/commit/e774af34c28093f7b1e5e1e30a5e4bdf3bca4faf))
+
+##### Code Style Changes
+
+*  improve jsdocs ([582233b8](https://github.com/lykmapipo/mongoose-test-helpers/commit/582233b850a9c3f6afce0a106010bbb7cf59f1e5))
+*  improve helpers jsdocs ([eca216d6](https://github.com/lykmapipo/mongoose-test-helpers/commit/eca216d663f1bd5dbcfb523374f8b6fd0eb3d29a))
+
+##### Tests
+
+*  refactor to use exported chai & sinon ([9c1a8195](https://github.com/lykmapipo/mongoose-test-helpers/commit/9c1a819510c484de23f113e02177c4e830b0d52c))
+
 #### 0.4.0 (2019-04-20)
 
 ##### Chores
