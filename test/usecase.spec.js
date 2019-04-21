@@ -2,23 +2,21 @@
 
 
 /* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const {
+  expect,
   connect,
   create,
   clear,
-  drop,
-  model
-} = require(path.join(__dirname, '..'));
+  createTestModel
+} = require('..');
 
 
 describe('use case', () => {
 
-  const User = model('User', new Schema({ name: String }));
+  const User = createTestModel();
+
   before(done => connect(done));
+
   beforeEach(done => User.create({ name: 'Test User' }, done));
 
   it('should be able to clear using provided models', done => {
@@ -37,7 +35,7 @@ describe('use case', () => {
   });
 
   it('should be able to clear using provided model names', done => {
-    clear('User', (error) => {
+    clear(User.modelName, (error) => {
       if (error) {
         done(error);
       } else {
@@ -90,5 +88,5 @@ describe('use case', () => {
     });
   });
 
-  after(done => drop(done));
+  after(done => clear(done));
 });

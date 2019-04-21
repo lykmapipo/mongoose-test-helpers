@@ -6,10 +6,8 @@ process.env.NODE_ENV = 'test';
 
 
 /* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-const MONGODB_URI = 'mongodb://localhost/mongoose-test-helpers';
 const {
+  expect,
   connect,
   disconnect,
   clear,
@@ -18,11 +16,14 @@ const {
   createTestModel,
   mockModel,
   mockInstance,
-} = require(path.join(__dirname, '..'));
+} = require('..');
 
+const MONGODB_URI = 'mongodb://localhost/test';
 
 describe('mongoose-test-helpers', () => {
+
   beforeEach(done => disconnect(done));
+
   afterEach(done => drop(done));
 
   it('should be able to connect', () => {
@@ -74,7 +75,7 @@ describe('mongoose-test-helpers', () => {
       expect(error).to.not.exist;
       expect(instance).to.exist;
       expect(instance.readyState).to.be.equal(1);
-      expect(instance.name).to.be.equal('mongoose-test-helpers');
+      expect(instance.name).to.be.equal('test');
       done(error, instance);
     });
   });
@@ -85,7 +86,7 @@ describe('mongoose-test-helpers', () => {
       expect(error).to.not.exist;
       expect(instance).to.exist;
       expect(instance.readyState).to.be.equal(1);
-      expect(instance.name).to.be.equal('mongoose-test-helpers');
+      expect(instance.name).to.be.equal('test');
       delete process.env.MONGODB_URI;
       done(error, instance);
     });
