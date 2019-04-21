@@ -26,6 +26,7 @@ process.env.DEBUG = true;
 /* dependencies */
 const _ = require('lodash');
 const sinon = require('sinon');
+const chai = require('chai');
 const mongoose = require('mongoose');
 const { parallel } = require('async');
 const {
@@ -41,7 +42,7 @@ const {
 
 
 /* setup sinon */
-require('chai').use(require('sinon-chai'));
+chai.use(require('sinon-chai'));
 require('sinon-mongoose');
 
 
@@ -299,3 +300,9 @@ exports.mockInstance = instance => {
  */
 exports.getModel = model;
 exports.model = model;
+
+
+/* shortcuts */
+exports.sinon = sinon;
+exports.chai = chai;
+exports.expect = chai.expect;
