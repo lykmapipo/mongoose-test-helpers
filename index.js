@@ -60,7 +60,7 @@ require('sinon-mongoose');
  * connect(<url>, done);
  * 
  */
-exports.connect = function connect(url, done) {
+exports.connect = (url, done) => {
 
   // ensure test database
   const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://localhost/test');
@@ -141,18 +141,18 @@ exports.drop = drop;
  * create(user, profile, done);
  * 
  */
-exports.create = function create(...instances) {
+exports.create = (...instances) => {
 
   // collect provided instances
   let _instances = [].concat(...instances);
 
   // obtain callback
-  const _done = _.last(_.filter([..._instances], function (instance) {
+  const _done = _.last(_.filter([..._instances], instance => {
     return !isInstance(instance);
   }));
 
   // collect actual model instances
-  _instances = _.filter([..._instances], function (instance) {
+  _instances = _.filter([..._instances], instance => {
     return isInstance(instance);
   });
 
@@ -163,14 +163,15 @@ exports.create = function create(...instances) {
   // TODO for same model use insertMany
   const connected =
     (mongoose.connection && mongoose.connection.readyState === 1);
-  let saves = _.map([..._instances], function (instance) {
+  let saves = _.map([..._instances], instance => {
     if (connected && instance.save) {
-      return function save(next) {
+      const save = next => {
         const fn = (instance.post || instance.save);
-        fn.call(instance, function afterSave(error, saved) {
+        fn.call(instance, (error, saved) => {
           next(error, saved);
         });
       };
+      return save;
     }
   });
 
@@ -199,7 +200,7 @@ exports.create = function create(...instances) {
  * const User = createTestModel({ name: { type: String } }, autopopulate);
  * 
  */
-exports.createTestModel = function createTestModel(schema, ...plugins) {
+exports.createTestModel = (schema, ...plugins) => {
   // ensure schema definition
   const definition = _.merge({}, {
     name: { type: String, searchable: true, index: true, fake: true }
@@ -209,7 +210,7 @@ exports.createTestModel = function createTestModel(schema, ...plugins) {
   const testModelSchema = new Schema(definition, { timestamps: true });
 
   // apply plugins
-  _.forEach([...plugins], function (plugin) {
+  _.forEach([...plugins], plugin => {
     testModelSchema.plugin(plugin);
   });
 

@@ -21,7 +21,7 @@ describe('use case', () => {
   before(done => connect(done));
   beforeEach(done => User.create({ name: 'Test User' }, done));
 
-  it('should be able to clear using provided models', (done) => {
+  it('should be able to clear using provided models', done => {
     clear(User, (error) => {
       if (error) {
         done(error);
@@ -36,7 +36,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to clear using provided model names', (done) => {
+  it('should be able to clear using provided model names', done => {
     clear('User', (error) => {
       if (error) {
         done(error);
@@ -51,7 +51,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to clear all models', (done) => {
+  it('should be able to clear all models', done => {
     clear((error) => {
       if (error) {
         done(error);
@@ -66,7 +66,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to create models', (done) => {
+  it('should be able to create models', done => {
     const a = new User({ name: 'A' });
     const b = new User({ name: 'B' });
     create(a, b, (error, results) => {
@@ -78,7 +78,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to create models', (done) => {
+  it('should be able to create models', done => {
     const a = new User({ name: 'A' });
     const b = new User({ name: 'B' });
     create([a, b], (error, results) => {
