@@ -47,7 +47,7 @@
     "mongoose": ">=5.5.2"
   },
   "dependencies": {
-    "@lykmapipo/mongoose-common": ">=0.17.0",
+    "@lykmapipo/mongoose-common": ">=0.18.1",
     "async": ">=2.6.2",
     "chai": ">=4.2.0",
     "lodash": ">=4.17.11",
