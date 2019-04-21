@@ -9,9 +9,11 @@
  * @version 0.1.0
  * @license MIT
  * @example
+ * 
  * const { setup, cleanup } = require('@lykmapipo/mongoose-test-helpers');
  * before(done => { setup(done) });
  * after(done => { cleanup(done) });
+ * 
  */
 
 
@@ -53,8 +55,10 @@ require('sinon-mongoose');
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * connect(done);
  * connect(<url>, done);
+ * 
  */
 exports.connect = function connect(url, done) {
 
@@ -80,7 +84,9 @@ exports.connect = function connect(url, done) {
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * disconnect(done);
+ * 
  */
 exports.disconnect = disconnect;
 
@@ -95,8 +101,10 @@ exports.disconnect = disconnect;
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * clear('User', 'Profile', done);
  * clear(done);
+ * 
  */
 exports.clear = clear;
 
@@ -111,7 +119,9 @@ exports.clear = clear;
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * drop(done);
+ * 
  */
 exports.drop = drop;
 
@@ -125,9 +135,11 @@ exports.drop = drop;
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * create(user, done);
  * create(user, profile, done);
  * create(user, profile, done);
+ * 
  */
 exports.create = function create(...instances) {
 
@@ -221,18 +233,15 @@ exports.createTestModel = function createTestModel(schema, ...plugins) {
  * @example
  * 
  * const Mock = mockModel(User);
- *
  * const find = Mock.expects('find').yields(null, [{...}]);
  *
  * User.find((error, results) => {
  *   Mock.verify();
  *   Mock.restore();
- *
  *   expect(find).to.have.been.calledOnce;
  *   expect(error).to.not.exist;
  *   expect(results).to.exist;
  *   expect(results).to.have.have.length(1);
- * 
  *   done(error, results);
  *  });
  * 
@@ -255,17 +264,14 @@ exports.mockModel = model => {
  * @example
  * 
  * const mock = mockInstance(new User());
- *
  * const save = mock.expects('save').yields(null, {...});
  *
  * user.save((error, results) => {
  *   Mock.verify();
  *   Mock.restore();
- *
  *   expect(save).to.have.been.calledOnce;
  *   expect(error).to.not.exist;
  *   expect(result).to.exist;
- * 
  *   done(error, results);
  *  });
  * 
@@ -284,8 +290,10 @@ exports.mockInstance = instance => {
  * @since 0.1.0
  * @version 0.1.0
  * @example
+ * 
  * const User = getModel('User');
  * const User = model('User');
+ * 
  */
 exports.getModel = model;
 exports.model = model;
