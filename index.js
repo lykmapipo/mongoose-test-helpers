@@ -10,9 +10,10 @@
  * @license MIT
  * @example
  * 
- * const { setup, cleanup } = require('@lykmapipo/mongoose-test-helpers');
+ * const { setup, clear, drop } = require('@lykmapipo/mongoose-test-helpers');
  * before(done => { setup(done) });
- * after(done => { cleanup(done) });
+ * after(done => { clear(done) });
+ * after(done => { drop(done) });
  * 
  */
 
