@@ -15,7 +15,8 @@ const {
   clear,
   drop,
   getModel,
-  createTestModel
+  createTestModel,
+  mockModel
 } = require(path.join(__dirname, '..'));
 
 
@@ -152,6 +153,30 @@ describe('mongoose-test-helpers', () => {
     expect(User.path('age')).to.exist;
     expect(User.path('year')).to.exist;
     expect(User.withTest).to.exist.and.to.be.a('function');
+  });
+
+  it('should be able to create mocked model', done => {
+    const User = createTestModel();
+    const Mock = mockModel(User);
+    expect(User).to.exist;
+    expect(Mock).to.exist;
+    expect(Mock.verify).to.exist.and.to.be.a('function');
+    expect(Mock.restore).to.exist.and.to.be.a('function');
+
+    const find =
+      Mock.expects('find').yields(null, [new User({ name: 'Test' })]);
+
+    User.find((error, results) => {
+      Mock.verify();
+      Mock.restore();
+
+      expect(find).to.have.been.calledOnce;
+      expect(error).to.not.exist;
+      expect(results).to.exist;
+      expect(results).to.have.have.length(1);
+
+      done(error, results);
+    });
   });
 
 });

@@ -22,11 +22,13 @@ process.env.DEBUG = true;
 
 /* dependencies */
 const _ = require('lodash');
+const sinon = require('sinon');
 const mongoose = require('mongoose');
 const { parallel } = require('async');
 const {
   connect: _connect,
   isInstance,
+  isModel,
   disconnect,
   clear,
   drop,
@@ -36,7 +38,6 @@ const {
 
 
 /* setup sinon */
-require('sinon');
 require('chai').use(require('sinon-chai'));
 require('sinon-mongoose');
 
@@ -205,6 +206,36 @@ exports.createTestModel = function createTestModel(schema, ...plugins) {
 
   // return created model
   return testModel;
+};
+
+
+/**
+ * @function mockModel
+ * @name mockModel
+ * @description Mock existing mongoose model
+ * @param {Model} model valid mongoose model
+ * @return {Object} valid mock of provided mongoose model
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.5.0
+ * @version 0.1.0
+ * @example
+ * 
+ * const Mock = mockModel('User');
+ * const Mock = mockModel(User);
+ *
+ * Mock.expects('find').chain('exec').yields(null, [{...}]);
+ *
+ * User.find((error, results) => {
+ *   Mock.verify()
+ *   Mock.restore()
+ *   // assertions
+ *   done(error, results);
+ *  });
+ * 
+ */
+exports.mockModel = model => {
+  const mocked = isModel(model) ? sinon.mock(model) : undefined;
+  return mocked;
 };
 
 
