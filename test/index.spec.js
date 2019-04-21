@@ -16,7 +16,8 @@ const {
   drop,
   getModel,
   createTestModel,
-  mockModel
+  mockModel,
+  mockInstance,
 } = require(path.join(__dirname, '..'));
 
 
@@ -157,8 +158,9 @@ describe('mongoose-test-helpers', () => {
 
   it('should be able to create mocked model', done => {
     const User = createTestModel();
-    const Mock = mockModel(User);
     expect(User).to.exist;
+
+    const Mock = mockModel(User);
     expect(Mock).to.exist;
     expect(Mock.verify).to.exist.and.to.be.a('function');
     expect(Mock.restore).to.exist.and.to.be.a('function');
@@ -176,6 +178,31 @@ describe('mongoose-test-helpers', () => {
       expect(results).to.have.have.length(1);
 
       done(error, results);
+    });
+  });
+
+  it('should be able to create mocked instance', done => {
+    const User = createTestModel();
+    expect(User).to.exist;
+    const user = new User({ name: 'Test' });
+    expect(user).to.exist;
+
+    const mock = mockInstance(user);
+    expect(mock).to.exist;
+    expect(mock.verify).to.exist.and.to.be.a('function');
+    expect(mock.restore).to.exist.and.to.be.a('function');
+
+    const save = mock.expects('save').yields(null, user);
+
+    user.save((error, result) => {
+      mock.verify();
+      mock.restore();
+
+      expect(save).to.have.been.calledOnce;
+      expect(error).to.not.exist;
+      expect(result).to.exist;
+
+      done(error, result);
     });
   });
 

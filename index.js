@@ -220,21 +220,58 @@ exports.createTestModel = function createTestModel(schema, ...plugins) {
  * @version 0.1.0
  * @example
  * 
- * const Mock = mockModel('User');
  * const Mock = mockModel(User);
  *
- * Mock.expects('find').chain('exec').yields(null, [{...}]);
+ * const find = Mock.expects('find').yields(null, [{...}]);
  *
  * User.find((error, results) => {
- *   Mock.verify()
- *   Mock.restore()
- *   // assertions
+ *   Mock.verify();
+ *   Mock.restore();
+ *
+ *   expect(find).to.have.been.calledOnce;
+ *   expect(error).to.not.exist;
+ *   expect(results).to.exist;
+ *   expect(results).to.have.have.length(1);
+ * 
  *   done(error, results);
  *  });
  * 
  */
 exports.mockModel = model => {
   const mocked = isModel(model) ? sinon.mock(model) : undefined;
+  return mocked;
+};
+
+
+/**
+ * @function mockInstance
+ * @name mockInstance
+ * @description Mock provided model instance
+ * @param {Object} instance valid model instance
+ * @return {Object} valid mock of provided model instance
+ * @author lally elias <lallyelias87@mail.com>
+ * @since 0.5.0
+ * @version 0.1.0
+ * @example
+ * 
+ * const mock = mockInstance(new User());
+ *
+ * const save = mock.expects('save').yields(null, {...});
+ *
+ * user.save((error, results) => {
+ *   Mock.verify();
+ *   Mock.restore();
+ *
+ *   expect(save).to.have.been.calledOnce;
+ *   expect(error).to.not.exist;
+ *   expect(result).to.exist;
+ * 
+ *   done(error, results);
+ *  });
+ * 
+ */
+exports.mockInstance = instance => {
+  const mocked = isInstance(instance) ? sinon.mock(instance) : undefined;
   return mocked;
 };
 
