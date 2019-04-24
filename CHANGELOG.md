@@ -1,3 +1,9 @@
+#### 0.5.1 (2019-04-24)
+
+##### Chores
+
+* **dependencies:**  force latest versions ([879f4ee8](https://github.com/lykmapipo/mongoose-test-helpers/commit/879f4ee81d1b497befd39de3d39f64bf5cbcc702))
+
 #### 0.5.0 (2019-04-21)
 
 ##### Chores
