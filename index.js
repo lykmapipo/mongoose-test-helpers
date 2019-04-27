@@ -27,6 +27,7 @@ process.env.DEBUG = true;
 const _ = require('lodash');
 const sinon = require('sinon');
 const chai = require('chai');
+const faker = require('@benmaruchu/faker');
 const mongoose = require('mongoose');
 const { parallel } = require('async');
 const {
@@ -303,6 +304,7 @@ exports.model = model;
 
 
 /* shortcuts */
+exports.faker = faker;
 exports.sinon = sinon;
 exports.chai = chai;
 exports.expect = chai.expect;
