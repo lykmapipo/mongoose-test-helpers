@@ -1,3 +1,20 @@
+#### 0.5.2 (2019-04-27)
+
+##### Chores
+
+* **dependencies:**
+  *  force latest versions ([7a7e0d88](https://github.com/lykmapipo/mongoose-test-helpers/commit/7a7e0d88ba62d1c69b266f1d6cdc1dea1fdece24))
+  *  force latest versions ([879f4ee8](https://github.com/lykmapipo/mongoose-test-helpers/commit/879f4ee81d1b497befd39de3d39f64bf5cbcc702))
+* **release:**  generate latest changelog & bump to v0.5.1 ([155bd626](https://github.com/lykmapipo/mongoose-test-helpers/commit/155bd626052f05381329c4e6699fe3cc3ac2318b))
+
+##### New Features
+
+*  expose data faker helper ([193eecac](https://github.com/lykmapipo/mongoose-test-helpers/commit/193eecaccdfb5ebdcdcda335df3bb10479e68ae4))
+
+##### Tests
+
+*  fix assertion for latest mongoose-common changes ([81bfe4f9](https://github.com/lykmapipo/mongoose-test-helpers/commit/81bfe4f913c164eb8024d38f8c3312f5d12aba2d))
+
 #### 0.5.1 (2019-04-24)
 
 ##### Chores
