@@ -1,3 +1,15 @@
+#### 0.5.4 (2019-05-01)
+
+##### Chores
+
+* **.npmrc:**  prevent npm version to commit and tag version ([20b29ac4](https://github.com/lykmapipo/mongoose-test-helpers/commit/20b29ac47f37e3a2a8b0d93814abca1321d95f78))
+* **deps:**  force latest version & audit fix ([d6d2d8f2](https://github.com/lykmapipo/mongoose-test-helpers/commit/d6d2d8f209e7473f930396b524d0082fd8a226d8))
+
+##### Refactors
+
+*  use test helpers to setup sinon and chai ([e91b806d](https://github.com/lykmapipo/mongoose-test-helpers/commit/e91b806d21c30ff335f1b6743d1ea6c259fe98c1))
+*  mmake createTestModel to use createModel ([aa3e2822](https://github.com/lykmapipo/mongoose-test-helpers/commit/aa3e2822ed3705945ca461527388d2f61ade6c87))
+
 #### 0.5.3 (2019-05-01)
 
 ##### Chores
