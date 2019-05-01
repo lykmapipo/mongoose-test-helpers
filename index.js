@@ -25,9 +25,7 @@ process.env.DEBUG = true;
 
 /* dependencies */
 const _ = require('lodash');
-const sinon = require('sinon');
-const chai = require('chai');
-const faker = require('@benmaruchu/faker');
+const { chai, faker, sinon, expect } = require('@lykmapipo/test-helpers');
 const mongoose = require('mongoose');
 const { parallel } = require('async');
 const {
@@ -42,8 +40,7 @@ const {
 } = require('@lykmapipo/mongoose-common');
 
 
-/* setup sinon */
-chai.use(require('sinon-chai'));
+/* setup sinon mongoose */
 require('sinon-mongoose');
 
 
@@ -299,4 +296,4 @@ exports.model = model;
 exports.faker = faker;
 exports.sinon = sinon;
 exports.chai = chai;
-exports.expect = chai.expect;
+exports.expect = expect;
