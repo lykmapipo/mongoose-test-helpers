@@ -1,3 +1,10 @@
+#### 0.5.3 (2019-05-01)
+
+##### Chores
+
+* **.npmrc:**  prevent npm version to commit and tag version ([20b29ac4](https://github.com/lykmapipo/mongoose-test-helpers/commit/20b29ac47f37e3a2a8b0d93814abca1321d95f78))
+* **deps:**  force latest version & audit fix ([d6d2d8f2](https://github.com/lykmapipo/mongoose-test-helpers/commit/d6d2d8f209e7473f930396b524d0082fd8a226d8))
+
 #### 0.5.2 (2019-04-27)
 
 ##### Chores

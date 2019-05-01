@@ -38,7 +38,7 @@ const {
   clear,
   drop,
   model,
-  Schema
+  createModel
 } = require('@lykmapipo/mongoose-common');
 
 
@@ -209,16 +209,8 @@ exports.createTestModel = (schema, ...plugins) => {
     name: { type: String, searchable: true, index: true, fake: true }
   }, schema);
 
-  // create schema
-  const testModelSchema = new Schema(definition, { timestamps: true });
-
-  // apply plugins
-  _.forEach([...plugins], plugin => {
-    testModelSchema.plugin(plugin);
-  });
-
   // register dynamic model
-  const testModel = model(testModelSchema);
+  const testModel = createModel(definition, { timestamps: true }, ...plugins);
 
   // return created model
   return testModel;
