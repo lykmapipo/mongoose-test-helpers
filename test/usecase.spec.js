@@ -88,5 +88,11 @@ describe('use case', () => {
     });
   });
 
+  it('should create test model with options', () => {
+    const Test = createTestModel({}, { modelName: 'Test' });
+    expect(Test).to.exist;
+    expect(Test.modelName).to.exist.and.be.equal('Test');
+  });
+
   after(done => clear(done));
 });

@@ -213,10 +213,13 @@ exports.createTestModel = (schema, ...plugins) => {
     }
   }, schema);
 
+  // obtain options
+  const options = _.first([...plugins], _.isPlainObject);
+
   // register dynamic model
   const testModel = createModel(
-    definition, { timestamps: true },
-    ...[...plugins, mongooseFaker]
+    definition, { timestamps: true, ...options },
+    ..._.filter([...plugins, mongooseFaker], _.isFunction)
   );
 
   // return created model
