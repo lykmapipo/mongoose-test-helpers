@@ -38,6 +38,7 @@ const {
   model,
   createModel
 } = require('@lykmapipo/mongoose-common');
+const mongooseFaker = require('@lykmapipo/mongoose-faker');
 
 
 /* setup sinon mongoose */
@@ -207,7 +208,10 @@ exports.createTestModel = (schema, ...plugins) => {
   }, schema);
 
   // register dynamic model
-  const testModel = createModel(definition, { timestamps: true }, ...plugins);
+  const testModel = createModel(
+    definition, { timestamps: true },
+    ...[...plugins, mongooseFaker]
+  );
 
   // return created model
   return testModel;
