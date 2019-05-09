@@ -1,3 +1,9 @@
+#### 0.7.0 (2019-05-09)
+
+##### New Features
+
+*  allow schema options on createTestModel ([d397c060](https://github.com/lykmapipo/mongoose-test-helpers/commit/d397c060ed5963892f2383633f52ed2324f94f76))
+
 #### 0.6.0 (2019-05-09)
 
 ##### New Features
