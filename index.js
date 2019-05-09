@@ -36,7 +36,9 @@ const {
   clear,
   drop,
   model,
-  createModel
+  createModel,
+  enableDebug,
+  disableDebug
 } = require('@lykmapipo/mongoose-common');
 const mongooseFaker = require('@lykmapipo/mongoose-faker');
 
@@ -306,6 +308,8 @@ exports.model = model;
 
 
 /* shortcuts */
+exports.enableDebug = enableDebug;
+exports.disableDebug = disableDebug;
 exports.faker = faker;
 exports.sinon = sinon;
 exports.chai = chai;

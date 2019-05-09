@@ -16,6 +16,8 @@ const {
   createTestModel,
   mockModel,
   mockInstance,
+  enableDebug,
+  disableDebug
 } = require('..');
 
 const MONGODB_URI = 'mongodb://localhost/test';
@@ -200,6 +202,14 @@ describe('mongoose-test-helpers', () => {
 
       done(error, result);
     });
+  });
+
+  it('should expose mongoose debuggin helpers', () => {
+    expect(enableDebug).to.exist;
+    expect(enableDebug).to.be.a('function');
+
+    expect(disableDebug).to.exist;
+    expect(disableDebug).to.be.a('function');
   });
 
 });
