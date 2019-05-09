@@ -17,7 +17,7 @@ describe('use case', () => {
 
   before(done => connect(done));
 
-  beforeEach(done => User.create({ name: 'Test User' }, done));
+  beforeEach(done => User.fake().save(done));
 
   it('should be able to clear using provided models', done => {
     clear(User, (error) => {
@@ -65,8 +65,8 @@ describe('use case', () => {
   });
 
   it('should be able to create models', done => {
-    const a = new User({ name: 'A' });
-    const b = new User({ name: 'B' });
+    const a = User.fake();
+    const b = User.fake();
     create(a, b, (error, results) => {
       const [a, b] = results;
       expect(error).to.not.exist;
@@ -77,8 +77,8 @@ describe('use case', () => {
   });
 
   it('should be able to create models', done => {
-    const a = new User({ name: 'A' });
-    const b = new User({ name: 'B' });
+    const a = User.fake();
+    const b = User.fake();
     create([a, b], (error, results) => {
       const [a, b] = results;
       expect(error).to.not.exist;

@@ -204,7 +204,13 @@ exports.create = (...instances) => {
 exports.createTestModel = (schema, ...plugins) => {
   // ensure schema definition
   const definition = _.merge({}, {
-    name: { type: String, searchable: true, index: true, fake: true }
+    name: {
+      type: String,
+      index: true,
+      searchable: true,
+      taggable: true,
+      fake: f => f.name.findName()
+    }
   }, schema);
 
   // register dynamic model
