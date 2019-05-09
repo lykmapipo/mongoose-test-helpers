@@ -1,3 +1,13 @@
+#### 0.6.0 (2019-05-09)
+
+##### New Features
+
+*  apply mongoose-faker when create test model ([c4209961](https://github.com/lykmapipo/mongoose-test-helpers/commit/c42099616874828aa5b8eb8c82cea3155db2ad83))
+
+##### Tests
+
+*  update usecases to use mongoose-faker ([f2556bdf](https://github.com/lykmapipo/mongoose-test-helpers/commit/f2556bdfed16361efffdf077ea64bb01485a43b6))
+
 #### 0.5.4 (2019-05-01)
 
 ##### Chores
