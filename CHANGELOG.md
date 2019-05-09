@@ -1,3 +1,9 @@
+#### 0.7.1 (2019-05-09)
+
+##### New Features
+
+*  expose mongoose debugging helpers ([e0c713a6](https://github.com/lykmapipo/mongoose-test-helpers/commit/e0c713a6ef4b67817721c451cd8a9803a2109ccc))
+
 #### 0.7.0 (2019-05-09)
 
 ##### New Features
