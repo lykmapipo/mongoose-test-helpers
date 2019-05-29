@@ -1,3 +1,13 @@
+#### 0.7.4 (2019-05-29)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([4af90245](https://github.com/lykmapipo/mongoose-test-helpers/commit/4af902456da170eaf07330da8eac3dab257c7022))
+
+##### Bug Fixes
+
+*  allow using common test database while in test env ([2e13c31c](https://github.com/lykmapipo/mongoose-test-helpers/commit/2e13c31cb7c75d1af02198e18c50a78cb8ae398b))
+
 #### 0.7.3 (2019-05-20)
 
 ##### Chores
