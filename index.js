@@ -21,15 +21,16 @@
 /* setup test environment */
 process.env.NODE_ENV = 'test';
 process.env.DEBUG = true;
+process.env.MONGODB_URI = 'mongodb://localhost/test';
 
 
 /* dependencies */
 const _ = require('lodash');
 const { chai, faker, sinon, expect } = require('@lykmapipo/test-helpers');
-const mongoose = require('mongoose');
 const { parallel } = require('async');
 const {
   connect: _connect,
+  isConnected,
   isInstance,
   isModel,
   disconnect,
@@ -64,7 +65,6 @@ require('sinon-mongoose');
  * 
  */
 exports.connect = (url, done) => {
-
   // ensure test database
   const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://localhost/test');
 
@@ -74,7 +74,6 @@ exports.connect = (url, done) => {
 
   // establish mongoose connection
   _connect(_url, _done);
-
 };
 
 
@@ -164,8 +163,7 @@ exports.create = (...instances) => {
 
   // map instances to save
   // TODO for same model use insertMany
-  const connected =
-    (mongoose.connection && mongoose.connection.readyState === 1);
+  const connected = isConnected();
   let saves = _.map([..._instances], instance => {
     if (connected && instance.save) {
       const save = next => {
