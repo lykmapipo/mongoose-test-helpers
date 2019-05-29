@@ -41,17 +41,17 @@
     "grunt-mocha-test": "^0.13.3",
     "jshint-stylish": "^2.2.1",
     "mocha": "^6.1.4",
-    "mongoose": ">=5.5.9"
+    "mongoose": ">=5.5.11"
   },
   "peerDependencies": {
-    "mongoose": ">=5.5.9"
+    "mongoose": ">=5.5.11"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.2.1",
-    "@lykmapipo/mongoose-common": ">=0.23.1",
+    "@lykmapipo/mongoose-common": ">=0.23.3",
     "@lykmapipo/mongoose-faker": ">=0.9.5",
     "@lykmapipo/test-helpers": ">=0.2.4",
-    "async": ">=3.0.0",
+    "async": ">=3.0.1",
     "chai": ">=4.2.0",
     "lodash": ">=4.17.11",
     "sinon": ">=7.3.2",
