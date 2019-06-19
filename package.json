@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.2.1",
-    "@lykmapipo/mongoose-common": ">=0.25.3",
+    "@lykmapipo/mongoose-common": ">=0.25.4",
     "@lykmapipo/mongoose-faker": ">=0.9.6",
     "@lykmapipo/test-helpers": ">=0.2.8",
     "async": ">=3.0.1",
