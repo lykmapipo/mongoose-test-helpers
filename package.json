@@ -42,21 +42,21 @@
     "handlebars": "^4.1.2",
     "jshint-stylish": "^2.2.1",
     "mocha": "^6.2.0",
-    "mongoose": ">=5.6.7",
+    "mongoose": ">=5.6.9",
     "shelljs": "^0.8.3"
   },
   "peerDependencies": {
-    "mongoose": ">=5.6.7"
+    "mongoose": ">=5.6.9"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.25.9",
+    "@lykmapipo/mongoose-common": ">=0.25.10",
     "@lykmapipo/mongoose-faker": ">=0.9.11",
-    "@lykmapipo/test-helpers": ">=0.3.0",
+    "@lykmapipo/test-helpers": ">=0.3.2",
     "async": ">=3.1.0",
     "chai": ">=4.2.0",
     "lodash": ">=4.17.15",
-    "sinon": ">=7.3.2",
+    "sinon": ">=7.4.1",
     "sinon-chai": ">=3.3.0",
     "sinon-mongoose": ">=2.3.0"
   }
