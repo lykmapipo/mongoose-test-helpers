@@ -163,8 +163,9 @@ describe('mongoose-test-helpers', () => {
     expect(Mock.verify).to.exist.and.to.be.a('function');
     expect(Mock.restore).to.exist.and.to.be.a('function');
 
+    const data = [new User({ name: 'Test' })];
     const find =
-      Mock.expects('find').yields(null, [new User({ name: 'Test' })]);
+      Mock.expects('find').yields(null, data);
 
     User.find((error, results) => {
       Mock.verify();
@@ -172,7 +173,7 @@ describe('mongoose-test-helpers', () => {
 
       expect(find).to.have.been.calledOnce;
       expect(error).to.not.exist;
-      expect(results).to.exist;
+      expect(results).to.exist.and.be.eql(data);
       expect(results).to.have.have.length(1);
 
       done(error, results);
@@ -199,6 +200,7 @@ describe('mongoose-test-helpers', () => {
       expect(save).to.have.been.calledOnce;
       expect(error).to.not.exist;
       expect(result).to.exist;
+      expect(result.name).to.exist.and.be.equal(user.name);
 
       done(error, result);
     });

@@ -45,7 +45,7 @@ const mongooseFaker = require('@lykmapipo/mongoose-faker');
 
 
 /* setup sinon mongoose */
-require('sinon-mongoose');
+require('./lib/sinon_mongoose');
 
 
 /**
