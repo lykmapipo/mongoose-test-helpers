@@ -1,3 +1,9 @@
+#### 0.7.29 (2020-01-14)
+
+##### Bug Fixes
+
+*  patch sinon mongoose mock ([c27d12db](https://github.com/lykmapipo/mongoose-test-helpers/commit/c27d12db61034ca2afedc961350ad9c5e9e55fed))
+
 #### 0.7.28 (2019-12-09)
 
 ##### Chores
