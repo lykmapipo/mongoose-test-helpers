@@ -41,19 +41,19 @@
     "grunt-mocha-test": "^0.13.3",
     "handlebars": "^4.7.2",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^7.0.0",
-    "mongoose": ">=5.8.9",
+    "mocha": "^7.0.1",
+    "mongoose": ">=5.8.11",
     "shelljs": "^0.8.3"
   },
   "peerDependencies": {
-    "mongoose": ">=5.8.9"
+    "mongoose": ">=5.8.11"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.29.2",
-    "@lykmapipo/mongoose-faker": ">=0.10.10",
-    "@lykmapipo/test-helpers": ">=0.5.6",
-    "async": ">=3.1.0",
+    "@lykmapipo/mongoose-common": ">=0.29.3",
+    "@lykmapipo/mongoose-faker": ">=0.10.11",
+    "@lykmapipo/test-helpers": ">=0.5.7",
+    "async": ">=3.1.1",
     "lodash": ">=4.17.15",
     "sinon": ">=8.1.1",
     "sinon-chai": ">=3.4.0",
