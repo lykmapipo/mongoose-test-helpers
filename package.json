@@ -41,22 +41,22 @@
     "grunt-mocha-test": "^0.13.3",
     "handlebars": "^4.7.3",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^7.0.1",
-    "mongoose": ">=5.9.1",
+    "mocha": "^7.1.0",
+    "mongoose": ">=5.9.2",
     "shelljs": "^0.8.3"
   },
   "peerDependencies": {
-    "mongoose": ">=5.9.1"
+    "mongoose": ">=5.9.2"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.29.4",
-    "@lykmapipo/mongoose-faker": ">=0.10.12",
-    "@lykmapipo/test-helpers": ">=0.5.8",
-    "async": ">=3.1.1",
+    "@lykmapipo/mongoose-common": ">=0.29.5",
+    "@lykmapipo/mongoose-faker": ">=0.10.13",
+    "@lykmapipo/test-helpers": ">=0.5.9",
+    "async": ">=3.2.0",
     "lodash": ">=4.17.15",
-    "sinon": ">=8.1.1",
-    "sinon-chai": ">=3.4.0",
+    "sinon": ">=9.0.0",
+    "sinon-chai": ">=3.5.0",
     "sinon-mongoose": ">=2.3.0"
   }
 }
