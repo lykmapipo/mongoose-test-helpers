@@ -50,12 +50,12 @@
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.30.0",
+    "@lykmapipo/mongoose-common": ">=0.31.0",
     "@lykmapipo/mongoose-faker": ">=0.10.15",
     "@lykmapipo/test-helpers": ">=0.5.13",
     "async": ">=3.2.0",
     "lodash": ">=4.17.15",
-    "sinon": ">=9.0.1",
+    "sinon": ">=9.0.2",
     "sinon-chai": ">=3.5.0"
   }
 }
