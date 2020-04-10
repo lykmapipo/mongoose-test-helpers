@@ -56,7 +56,6 @@
     "async": ">=3.2.0",
     "lodash": ">=4.17.15",
     "sinon": ">=9.0.1",
-    "sinon-chai": ">=3.5.0",
-    "sinon-mongoose": ">=2.3.0"
+    "sinon-chai": ">=3.5.0"
   }
 }

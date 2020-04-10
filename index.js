@@ -26,7 +26,18 @@ process.env.MONGODB_URI = 'mongodb://localhost/test';
 
 /* dependencies */
 const _ = require('lodash');
-const { chai, faker, sinon, expect } = require('@lykmapipo/test-helpers');
+const {
+  chai,
+  expect,
+  fake,
+  faker,
+  mock,
+  restore,
+  should,
+  sinon,
+  spy,
+  stub
+} = require('@lykmapipo/test-helpers');
 const { parallel } = require('async');
 const {
   connect: _connect,
@@ -308,7 +319,13 @@ exports.model = model;
 /* shortcuts */
 exports.enableDebug = enableDebug;
 exports.disableDebug = disableDebug;
-exports.faker = faker;
-exports.sinon = sinon;
 exports.chai = chai;
 exports.expect = expect;
+exports.fake = fake;
+exports.faker = faker;
+exports.mock = mock;
+exports.restore = restore;
+exports.should = should;
+exports.sinon = sinon;
+exports.spy = spy;
+exports.stub = stub;
