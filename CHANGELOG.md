@@ -1,3 +1,13 @@
+#### 0.7.41 (2020-04-10)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([14129b0e](https://github.com/lykmapipo/mongoose-test-helpers/commit/14129b0ea1176e88b3f64852529663b5b49cc176))
+
+##### Refactors
+
+*  export sinon & chai shortcuts ([1fcd6f1d](https://github.com/lykmapipo/mongoose-test-helpers/commit/1fcd6f1d0429c0303b4501ac3b8b4fce5fe5dc9f))
+
 #### 0.7.40 (2020-04-08)
 
 ##### Chores
