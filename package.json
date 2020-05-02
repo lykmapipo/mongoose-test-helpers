@@ -42,17 +42,17 @@
     "handlebars": "^4.7.6",
     "jshint-stylish": "^2.2.1",
     "mocha": "^7.1.2",
-    "mongoose": ">=5.9.10",
+    "mongoose": ">=5.9.11",
     "shelljs": "^0.8.4"
   },
   "peerDependencies": {
-    "mongoose": ">=5.9.10"
+    "mongoose": ">=5.9.11"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.32.1",
-    "@lykmapipo/mongoose-faker": ">=0.10.17",
-    "@lykmapipo/test-helpers": ">=0.5.17",
+    "@lykmapipo/mongoose-common": ">=0.33.1",
+    "@lykmapipo/mongoose-faker": ">=0.10.18",
+    "@lykmapipo/test-helpers": ">=0.5.18",
     "async": ">=3.2.0",
     "lodash": ">=4.17.15",
     "sinon": ">=9.0.2",
