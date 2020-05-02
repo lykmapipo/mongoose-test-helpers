@@ -1,3 +1,9 @@
+#### 0.7.45 (2020-05-02)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([51c692cd](https://github.com/lykmapipo/mongoose-test-helpers/commit/51c692cd32c297b2ac1faa550465948db33d27ed))
+
 #### 0.7.44 (2020-04-27)
 
 ##### Chores
