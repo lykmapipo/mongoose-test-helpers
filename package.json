@@ -41,18 +41,18 @@
     "grunt-mocha-test": "^0.13.3",
     "handlebars": "^4.7.6",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^7.1.2",
-    "mongoose": ">=5.9.15",
+    "mocha": "^7.2.0",
+    "mongoose": ">=5.9.18",
     "shelljs": "^0.8.4"
   },
   "peerDependencies": {
-    "mongoose": ">=5.9.15"
+    "mongoose": ">=5.9.18"
   },
   "dependencies": {
     "@benmaruchu/faker": ">=4.3.0",
-    "@lykmapipo/mongoose-common": ">=0.34.3",
-    "@lykmapipo/mongoose-faker": ">=0.10.20",
-    "@lykmapipo/test-helpers": ">=0.5.20",
+    "@lykmapipo/mongoose-common": ">=0.35.1",
+    "@lykmapipo/mongoose-faker": ">=0.10.21",
+    "@lykmapipo/test-helpers": ">=0.5.22",
     "async": ">=3.2.0",
     "lodash": ">=4.17.15",
     "sinon": ">=9.0.2",
