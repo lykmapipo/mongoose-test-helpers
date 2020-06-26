@@ -1,25 +1,16 @@
 'use strict';
 
-
 /* dependencies */
-const {
-  expect,
-  connect,
-  create,
-  clear,
-  createTestModel
-} = require('..');
-
+const { expect, connect, create, clear, createTestModel } = require('..');
 
 describe('use case', () => {
-
   const User = createTestModel();
 
-  before(done => connect(done));
+  before((done) => connect(done));
 
-  beforeEach(done => User.fake().save(done));
+  beforeEach((done) => User.fake().save(done));
 
-  it('should be able to clear using provided models', done => {
+  it('should be able to clear using provided models', (done) => {
     clear(User, (error) => {
       if (error) {
         done(error);
@@ -34,7 +25,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to clear using provided model names', done => {
+  it('should be able to clear using provided model names', (done) => {
     clear(User.modelName, (error) => {
       if (error) {
         done(error);
@@ -49,7 +40,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to clear all models', done => {
+  it('should be able to clear all models', (done) => {
     clear((error) => {
       if (error) {
         done(error);
@@ -64,7 +55,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to create models', done => {
+  it('should be able to create models', (done) => {
     const a = User.fake();
     const b = User.fake();
     create(a, b, (error, results) => {
@@ -76,7 +67,7 @@ describe('use case', () => {
     });
   });
 
-  it('should be able to create models', done => {
+  it('should be able to create models', (done) => {
     const a = User.fake();
     const b = User.fake();
     create([a, b], (error, results) => {
@@ -94,5 +85,5 @@ describe('use case', () => {
     expect(Test.modelName).to.exist.and.be.equal('Test');
   });
 
-  after(done => clear(done));
+  after((done) => clear(done));
 });

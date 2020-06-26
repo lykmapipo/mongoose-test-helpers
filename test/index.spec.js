@@ -1,9 +1,7 @@
 'use strict';
 
-
 /* set environment */
 process.env.NODE_ENV = 'test';
-
 
 /* dependencies */
 const {
@@ -17,16 +15,15 @@ const {
   mockModel,
   mockInstance,
   enableDebug,
-  disableDebug
+  disableDebug,
 } = require('..');
 
 const MONGODB_URI = 'mongodb://127.0.0.1/test';
 
 describe('mongoose-test-helpers', () => {
+  beforeEach((done) => disconnect(done));
 
-  beforeEach(done => disconnect(done));
-
-  afterEach(done => drop(done));
+  afterEach((done) => drop(done));
 
   it('should be able to connect', () => {
     expect(connect).to.exist;
@@ -43,7 +40,7 @@ describe('mongoose-test-helpers', () => {
   it('should be able to clear', () => {
     expect(clear).to.exist;
     expect(clear).to.be.a('function');
-    expect(clear.length).to.be.equal(0);
+    expect(clear.length).to.be.equal(1);
   });
 
   it('should be able to get model silent', () => {
@@ -58,7 +55,7 @@ describe('mongoose-test-helpers', () => {
     expect(drop.length).to.be.equal(2);
   });
 
-  it('should be able to connect on default test db', done => {
+  it('should be able to connect on default test db', (done) => {
     connect((error, instance) => {
       expect(error).to.not.exist;
       expect(instance).to.exist;
@@ -68,7 +65,7 @@ describe('mongoose-test-helpers', () => {
     });
   });
 
-  it('should be able to connect on given url', done => {
+  it('should be able to connect on given url', (done) => {
     connect(MONGODB_URI, (error, instance) => {
       expect(error).to.not.exist;
       expect(instance).to.exist;
@@ -78,7 +75,7 @@ describe('mongoose-test-helpers', () => {
     });
   });
 
-  it('should be able to connect from process.env.MONGODB_URI', done => {
+  it('should be able to connect from process.env.MONGODB_URI', (done) => {
     process.env.MONGODB_URI = MONGODB_URI;
     connect((error, instance) => {
       expect(error).to.not.exist;
@@ -90,14 +87,14 @@ describe('mongoose-test-helpers', () => {
     });
   });
 
-  it('should be able to clear provided models', done => {
+  it('should be able to clear provided models', (done) => {
     clear('User', (error) => {
       expect(error).to.not.exist;
       done(error);
     });
   });
 
-  it('should be able to clear models', done => {
+  it('should be able to clear models', (done) => {
     clear((error) => {
       expect(error).to.not.exist;
       done(error);
@@ -127,7 +124,7 @@ describe('mongoose-test-helpers', () => {
     const User = createTestModel({
       name: { type: String, searchable: true, index: true, fake: true },
       age: { type: Number, index: true, fake: true },
-      year: { type: Number, index: true, fake: true }
+      year: { type: Number, index: true, fake: true },
     });
     expect(User).to.exist;
     expect(User.modelName).to.exist;
@@ -138,13 +135,16 @@ describe('mongoose-test-helpers', () => {
   });
 
   it('should be able to create test model with schema and plugins', () => {
-    const User = createTestModel({
-      name: { type: String, searchable: true, index: true, fake: true },
-      age: { type: Number, index: true, fake: true },
-      year: { type: Number, index: true, fake: true }
-    }, function (schema) {
-      schema.statics.withTest = function withTest() {};
-    });
+    const User = createTestModel(
+      {
+        name: { type: String, searchable: true, index: true, fake: true },
+        age: { type: Number, index: true, fake: true },
+        year: { type: Number, index: true, fake: true },
+      },
+      function (schema) {
+        schema.statics.withTest = function withTest() {};
+      }
+    );
     expect(User).to.exist;
     expect(User.modelName).to.exist;
     expect(User.base).to.exist;
@@ -154,7 +154,7 @@ describe('mongoose-test-helpers', () => {
     expect(User.withTest).to.exist.and.to.be.a('function');
   });
 
-  it('should be able to create mocked model', done => {
+  it('should be able to create mocked model', (done) => {
     const User = createTestModel();
     expect(User).to.exist;
 
@@ -164,8 +164,7 @@ describe('mongoose-test-helpers', () => {
     expect(Mock.restore).to.exist.and.to.be.a('function');
 
     const data = [new User({ name: 'Test' })];
-    const find =
-      Mock.expects('find').yields(null, data);
+    const find = Mock.expects('find').yields(null, data);
 
     User.find((error, results) => {
       Mock.verify();
@@ -180,7 +179,7 @@ describe('mongoose-test-helpers', () => {
     });
   });
 
-  it('should be able to create mocked instance', done => {
+  it('should be able to create mocked instance', (done) => {
     const User = createTestModel();
     expect(User).to.exist;
     const user = new User({ name: 'Test' });
@@ -213,5 +212,4 @@ describe('mongoose-test-helpers', () => {
     expect(disableDebug).to.exist;
     expect(disableDebug).to.be.a('function');
   });
-
 });

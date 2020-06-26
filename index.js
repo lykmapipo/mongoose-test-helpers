@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * @module mongoose-test-helpers
  * @description Re-usable test helpers for mongoose
@@ -9,20 +8,18 @@
  * @version 0.1.0
  * @license MIT
  * @example
- * 
+ *
  * const { setup, clear, drop } = require('@lykmapipo/mongoose-test-helpers');
  * before(done => { setup(done) });
  * after(done => { clear(done) });
  * after(done => { drop(done) });
- * 
+ *
  */
-
 
 /* setup test environment */
 process.env.NODE_ENV = 'test';
 process.env.DEBUG = true;
 process.env.MONGODB_URI = 'mongodb://127.0.0.1/test';
-
 
 /* dependencies */
 const _ = require('lodash');
@@ -36,13 +33,12 @@ const {
   should,
   sinon,
   spy,
-  stub
+  stub,
 } = require('@lykmapipo/test-helpers');
 const { parallel } = require('async');
 const {
-  connect: _connect,
+  connect: connectDatabase,
   isConnected,
-  isInstance,
   isModel,
   disconnect,
   clear,
@@ -50,43 +46,41 @@ const {
   model,
   createModel,
   enableDebug,
-  disableDebug
-} = require('@lykmapipo/mongoose-common');
+  disableDebug,
+} = require('@lykmapipo/mongoose-connection');
+const { isInstance } = require('@lykmapipo/mongoose-common');
 const mongooseFaker = require('@lykmapipo/mongoose-faker');
-
 
 /* setup sinon mongoose */
 require('./lib/sinon_mongoose');
-
 
 /**
  * @function connect
  * @name connect
  * @description Opens the default mongoose connection
- * @param {String} [url] valid mongodb conenction string. if not provided it 
+ * @param {String} [url] valid mongodb conenction string. if not provided it
  * will be obtained from process.env.MONGODB_URI
  * @param {Function} done a callback to invoke on success or failure
  * @author lally elias <lallyelias87@mail.com>
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * connect(done);
  * connect(<url>, done);
- * 
+ *
  */
 exports.connect = (url, done) => {
   // ensure test database
-  const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://127.0.0.1/test');
+  const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/test';
 
   // normalize arguments
   const _url = _.isFunction(url) ? MONGODB_URI : url;
   const _done = _.isFunction(url) ? url : done;
 
   // establish mongoose connection
-  _connect(_url, _done);
+  connectDatabase(_url, _done);
 };
-
 
 /**
  * @function disconnect
@@ -97,12 +91,11 @@ exports.connect = (url, done) => {
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * disconnect(done);
- * 
+ *
  */
 exports.disconnect = disconnect;
-
 
 /**
  * @function clear
@@ -114,30 +107,28 @@ exports.disconnect = disconnect;
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * clear('User', 'Profile', done);
  * clear(done);
- * 
+ *
  */
 exports.clear = clear;
-
 
 /**
  * @function drop
  * @name drop
- * @description Deletes the given database, including all collections, 
+ * @description Deletes the given database, including all collections,
  * documents, and indexes
  * @param {Function} done a callback to invoke on success or failure
  * @author lally elias <lallyelias87@mail.com>
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * drop(done);
- * 
+ *
  */
 exports.drop = drop;
-
 
 /**
  * @function create
@@ -148,24 +139,25 @@ exports.drop = drop;
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * create(user, done);
  * create(user, profile, done);
  * create(user, profile, done);
- * 
+ *
  */
 exports.create = (...instances) => {
-
   // collect provided instances
   let _instances = [].concat(...instances);
 
   // obtain callback
-  const _done = _.last(_.filter([..._instances], instance => {
-    return !isInstance(instance);
-  }));
+  const _done = _.last(
+    _.filter([..._instances], (instance) => {
+      return !isInstance(instance);
+    })
+  );
 
   // collect actual model instances
-  _instances = _.filter([..._instances], instance => {
+  _instances = _.filter([..._instances], (instance) => {
     return isInstance(instance);
   });
 
@@ -175,10 +167,10 @@ exports.create = (...instances) => {
   // map instances to save
   // TODO for same model use insertMany
   const connected = isConnected();
-  let saves = _.map([..._instances], instance => {
+  let saves = _.map([..._instances], (instance) => {
     if (connected && instance.save) {
-      const save = next => {
-        const fn = (instance.post || instance.save);
+      const save = (next) => {
+        const fn = instance.post || instance.save;
         fn.call(instance, (error, saved) => {
           next(error, saved);
         });
@@ -192,9 +184,7 @@ exports.create = (...instances) => {
 
   // save
   parallel(saves, _done);
-
 };
-
 
 /**
  * @function createTestModel
@@ -207,36 +197,40 @@ exports.create = (...instances) => {
  * @since 0.4.0
  * @version 0.1.0
  * @example
- * 
+ *
  * const User = createTestModel();
  * const User = createTestModel({ name: { type: String } }, autopopulate);
- * 
+ *
  */
 exports.createTestModel = (schema, ...plugins) => {
   // ensure schema definition
-  const definition = _.merge({}, {
-    name: {
-      type: String,
-      index: true,
-      searchable: true,
-      taggable: true,
-      fake: f => f.name.findName()
-    }
-  }, schema);
+  const definition = _.merge(
+    {},
+    {
+      name: {
+        type: String,
+        index: true,
+        searchable: true,
+        taggable: true,
+        fake: (f) => f.name.findName(),
+      },
+    },
+    schema
+  );
 
   // obtain options
   const options = _.first([...plugins], _.isPlainObject);
 
   // register dynamic model
   const testModel = createModel(
-    definition, { timestamps: true, ...options },
+    definition,
+    { timestamps: true, ...options },
     ..._.filter([...plugins, mongooseFaker], _.isFunction)
   );
 
   // return created model
   return testModel;
 };
-
 
 /**
  * @function mockModel
@@ -248,7 +242,7 @@ exports.createTestModel = (schema, ...plugins) => {
  * @since 0.5.0
  * @version 0.1.0
  * @example
- * 
+ *
  * const Mock = mockModel(User);
  * const find = Mock.expects('find').yields(null, [{...}]);
  *
@@ -261,13 +255,12 @@ exports.createTestModel = (schema, ...plugins) => {
  *   expect(results).to.have.have.length(1);
  *   done(error, results);
  *  });
- * 
+ *
  */
-exports.mockModel = model => {
+exports.mockModel = (model) => {
   const mocked = isModel(model) ? sinon.mock(model) : undefined;
   return mocked;
 };
-
 
 /**
  * @function mockInstance
@@ -279,7 +272,7 @@ exports.mockModel = model => {
  * @since 0.5.0
  * @version 0.1.0
  * @example
- * 
+ *
  * const mock = mockInstance(new User());
  * const save = mock.expects('save').yields(null, {...});
  *
@@ -291,13 +284,12 @@ exports.mockModel = model => {
  *   expect(result).to.exist;
  *   done(error, results);
  *  });
- * 
+ *
  */
-exports.mockInstance = instance => {
+exports.mockInstance = (instance) => {
   const mocked = isInstance(instance) ? sinon.mock(instance) : undefined;
   return mocked;
 };
-
 
 /**
  * @function getModel
@@ -307,14 +299,13 @@ exports.mockInstance = instance => {
  * @since 0.1.0
  * @version 0.1.0
  * @example
- * 
+ *
  * const User = getModel('User');
  * const User = model('User');
- * 
+ *
  */
 exports.getModel = model;
 exports.model = model;
-
 
 /* shortcuts */
 exports.enableDebug = enableDebug;
