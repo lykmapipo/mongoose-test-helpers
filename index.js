@@ -21,7 +21,7 @@
 /* setup test environment */
 process.env.NODE_ENV = 'test';
 process.env.DEBUG = true;
-process.env.MONGODB_URI = 'mongodb://localhost/test';
+process.env.MONGODB_URI = 'mongodb://127.0.0.1/test';
 
 
 /* dependencies */
@@ -77,7 +77,7 @@ require('./lib/sinon_mongoose');
  */
 exports.connect = (url, done) => {
   // ensure test database
-  const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://localhost/test');
+  const MONGODB_URI = (process.env.MONGODB_URI || 'mongodb://127.0.0.1/test');
 
   // normalize arguments
   const _url = _.isFunction(url) ? MONGODB_URI : url;

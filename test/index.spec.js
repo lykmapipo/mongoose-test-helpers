@@ -20,7 +20,7 @@ const {
   disableDebug
 } = require('..');
 
-const MONGODB_URI = 'mongodb://localhost/test';
+const MONGODB_URI = 'mongodb://127.0.0.1/test';
 
 describe('mongoose-test-helpers', () => {
 
