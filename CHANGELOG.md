@@ -1,3 +1,14 @@
+#### 0.8.0 (2020-06-26)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([849c38e2](https://github.com/lykmapipo/mongoose-test-helpers/commit/849c38e2cd78f52ddf615b6b3bb4f5801eb9d567))
+
+##### Refactors
+
+*  use connection helpers ([9141421c](https://github.com/lykmapipo/mongoose-test-helpers/commit/9141421c8363880b5387731df46fc18c2448ec9d))
+*  use 127.0.0.1 than localhost ([92da0a62](https://github.com/lykmapipo/mongoose-test-helpers/commit/92da0a626cf54c5198ff9d10a08eae8736ee4bc0))
+
 #### 0.7.48 (2020-06-10)
 
 ##### Chores
