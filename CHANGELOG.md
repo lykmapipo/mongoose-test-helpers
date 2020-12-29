@@ -1,3 +1,9 @@
+#### 0.8.6 (2020-12-29)
+
+##### Bug Fixes
+
+*  connect & disconnect ([3768c476](https://github.com/lykmapipo/mongoose-test-helpers/commit/3768c476b49362b4f98059f8d60e27363697d256))
+
 #### 0.8.5 (2020-12-27)
 
 ##### Chores
